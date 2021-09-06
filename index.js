@@ -9,7 +9,7 @@ const { UserRoutes } = require("./routes");
 
 const app = express();
 
-app.use(express.static("public"))
+app.use(express.static(__dirname+'/public'))
 
 var requestTime = function (req, res, next) {
 

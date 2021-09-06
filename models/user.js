@@ -20,6 +20,14 @@ const userSchema = new Schema(
       required: true,
       index: true,
     },
+    img:
+    {
+        type: String
+    },
+    login : {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );
