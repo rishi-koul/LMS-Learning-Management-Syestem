@@ -67,7 +67,7 @@ app.get("/", function(req, res){
 
 app.get("/login", function(req, res){
     if(req.isAuthenticated()){
-        res.redirect("/", {log : true})
+        res.redirect("/")
     }else{
         res.render("login", {log : false})
     }
@@ -92,7 +92,7 @@ app.post("/login", function(req, res){
 
 app.get("/register", function(req, res){
     if(req.isAuthenticated()){
-        res.redirect("/", {log : true})
+        res.redirect("/")
     }else{
         res.render("register", {log : false})
     }
@@ -122,7 +122,7 @@ app.get("/todo", function (req, res) {
     if(req.isAuthenticated()){
         res.render("todo.ejs", {newListItem: req.user.todo, log : true})
     }else{
-        res.redirect("/login", {log : false})
+        res.redirect("/login")
     }
 })
 
@@ -165,7 +165,7 @@ app.get("/profile", function(req, res){
         res.render("profile.ejs", { user:req.user, msg: "", log : true} )
     }
     else{
-        res.redirect("/login", {log : false})
+        res.redirect("/login")
     }
 })
 
@@ -198,6 +198,40 @@ app.post("/profile", async function(req, res){
     await User.find({_id: req.user._id}, async function(err, foundUser){
         res.render("profile.ejs", { user:foundUser[0], msg: msg, log: true} )
     })
+})
+
+app.get("/courses", function(req, res){
+    if(req.isAuthenticated()){
+        res.render("courses.ejs", {log : true} )
+    }
+    else{
+        res.redirect("/login")
+    }
+})
+
+app.get("/l1", function(req, res){
+    if(req.isAuthenticated()){
+        res.render("l1.ejs", {log : true} )
+    }
+    else{
+        res.redirect("/login")
+    }
+})
+app.get("/l2", function(req, res){
+    if(req.isAuthenticated()){
+        res.render("l2.ejs", {log : true} )
+    }
+    else{
+        res.redirect("/login")
+    }
+})
+app.get("/l3", function(req, res){
+    if(req.isAuthenticated()){
+        res.render("l3.ejs", {log : true} )
+    }
+    else{
+        res.redirect("/login")
+    }
 })
 
 app.listen(process.env.PORT || 3000, function(){
