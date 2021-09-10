@@ -1,2 +1,2 @@
-# LMS-Learning-Management-Syestem
-Making a LMS platform
+# learning-authentication-security
+Learning various secure ways for authentication
