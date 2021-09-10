@@ -44,7 +44,6 @@ const usersSchema = new mongoose.Schema({
     fName: String,
     lName: String,
     password: String,
-    secret: String,
     image: String,
     todo: [ {type: String} ]
 })
