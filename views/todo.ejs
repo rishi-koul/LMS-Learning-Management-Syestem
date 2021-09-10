@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+    <div class="box">     
+            <% for(var item = 0; item < newListItem.length; item++){ %>
+                <form action="/todo/delete" method="POST">
+                    <div class="item">
+                        <input onchange="this.form.submit()" type="checkbox" name="checkbox" value="<%= item %>">
+                        <p>
+                            <%= newListItem[item] %>
+                        </p>
+                    </div>
+                </form>
+            <% } %>
+        
+            <form class = "item" action="/todo" method="POST">
+                <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+                <button class="button-2" type="submit">+</button>
+            </form>
+    </div>
+
+    <%- include('partials/footer') %>
