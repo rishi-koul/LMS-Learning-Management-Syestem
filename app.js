@@ -225,6 +225,4 @@ app.post("/profile", async function(req, res){
     })
 })
 
-app.listen(process.env.PORT || 3000, function(){
-    console.log("Running....");
-});
+app.listen(process.env.PORT || 3000);
