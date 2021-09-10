@@ -5,10 +5,8 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const session = require("express-session")
-const passport = require("passport")
+var passport = require('passport')
 const passportLocalMongoose = require("passport-local-mongoose")
-const GoogleStrategy = require("passport-google-oauth20").Strategy
-const findOrCreate = require("mongoose-findorcreate")
 
 var multer = require('multer');
 
@@ -46,41 +44,19 @@ const usersSchema = new mongoose.Schema({
     fName: String,
     lName: String,
     password: String,
-    googleId: String,
     secret: String,
     image: String,
     todo: [ {type: String} ]
 })
 
 usersSchema.plugin(passportLocalMongoose)
-usersSchema.plugin(findOrCreate)
 
 const User = mongoose.model("User", usersSchema)
 
 passport.use(User.createStrategy())
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
-  
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
-  });
-
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets",
-    userProfileURL:"https://www.googleapis.com/oauth2/v3/userinfo"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
 
 app.get("/", function(req, res){
     if(req.isAuthenticated()){
